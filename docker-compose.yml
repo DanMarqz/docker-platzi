@@ -1,14 +1,22 @@
+# Define que features soporta
 version: "3.8"
 
+# Services define una parte de la app
 services:
+  # Servicio que va a correr nuestra app, la base de datos
   app:
+    # La imagen que utilizara los contenedores del servicio
     image: platziapp
+    # Define las variables de entorno
     environment:
       MONGO_URL: "mongodb://db:27017/test"
+    # Este servicio va a depender del otro
     depends_on:
       - db
+    # Define el puerto a exponer en el contenedor y en local
     ports:
       - "3000:3000"
 
   db:
+  # La imagen que utilizara el servicio
     image: mongo
