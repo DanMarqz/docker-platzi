@@ -6,7 +6,9 @@ services:
   # Servicio que va a correr nuestra app, la base de datos
   app:
     # La imagen que utilizara los contenedores del servicio
-    image: platziapp
+    # image: platziapp
+    # Se sustituye el image por build para que utilice los archivos en disco
+    build: .
     # Define las variables de entorno
     environment:
       MONGO_URL: "mongodb://db:27017/test"
@@ -16,6 +18,10 @@ services:
     # Define el puerto a exponer en el contenedor y en local
     ports:
       - "3000:3000"
+    volumes: 
+      - .:/usr/src
+      - /usr/src/node_modules
+    command: npx nodemon --legacy-watch index.js
 
   db:
   # La imagen que utilizara el servicio
